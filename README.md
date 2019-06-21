@@ -12,7 +12,7 @@ Contains the examples in my blog post [Introduction to Erlang](https://yalinguna
 - `guess`: The Erlang implementation of my [Akka-based number guessing game](https://yalingunayer.com/blog/actor-based-number-guessing-game-in-akka/) from earlier
 
 ## Running
-To run an example, execute `run.sh` and pass it the name of the example (e.g. `./run.sh actorlike`)
+To run an example, execute `run.sh` and pass it the name of the example (e.g. `./run.sh pokemon`)
 
 ## License
 MIT
