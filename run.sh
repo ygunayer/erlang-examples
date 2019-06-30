@@ -10,15 +10,19 @@ if [ -f "./$PROJECT/$PROJECT.erl" ]; then
     cd "$PROJECT"
     echo $(pwd)
 
-    rm *.beam
-    for f in *.erl
-    do
-        MODULE=$(echo $f | sed s/\.erl//)
-        echo "Compiling $MODULE..."
-        erl -compile $MODULE
-    done
-    echo "Compile finished, running $PROJECT..."
-    erl -noshell -s $PROJECT -s init stop
+    if [ -f "run.sh" ]; then
+        ./run.sh
+    else
+        rm *.beam
+        for f in *.erl
+        do
+            MODULE=$(echo $f | sed s/\.erl//)
+            echo "Compiling $MODULE..."
+            erl -compile $MODULE
+        done
+        echo "Compile finished, running $PROJECT..."
+        erl -noshell -s $PROJECT -s init stop
+    fi
 else
     echo "Project $PROJECT was not found"
     exit 1
