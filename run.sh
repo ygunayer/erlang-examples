@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+set -e
+
 PROJECT=$1
 
 if [ -z "$PROJECT" ]; then
@@ -6,24 +8,26 @@ if [ -z "$PROJECT" ]; then
     exit 1
 fi
 
-if [ -f "./$PROJECT/$PROJECT.erl" ]; then
-    cd "$PROJECT"
-    echo $(pwd)
+if [ ! -d "./$PROJECT" ]; then
+    echo "No such project exists: $PROJECT"
+    exit 1
+fi
 
-    if [ -f "run.sh" ]; then
-        ./run.sh
-    else
-        rm *.beam
-        for f in *.erl
-        do
-            MODULE=$(echo $f | sed s/\.erl//)
-            echo "Compiling $MODULE..."
-            erl -compile $MODULE
-        done
-        echo "Compile finished, running $PROJECT..."
-        erl -noshell -s $PROJECT -s init stop
-    fi
+cd "$PROJECT"
+
+if [ -f "run.sh" ]; then
+    ./run.sh
+elif [ -f "$PROJECT.erl" ]; then
+    rm -f *.beam
+    for f in *.erl
+    do
+        MODULE=$(echo $f | sed s/\.erl//)
+        echo "Compiling $MODULE..."
+        erl -compile $MODULE
+    done
+    echo "Compile finished, running $PROJECT..."
+    erl -noshell -s $PROJECT -s init stop
 else
-    echo "Project $PROJECT was not found"
+    echo "No entrypoint found for project $PROJECT"
     exit 1
 fi
