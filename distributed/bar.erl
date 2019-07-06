@@ -5,9 +5,9 @@ start() ->
     % notice how we can transparently send our `Pid` to remote node
     % without having to specify anything
     {foo_handler, 'foo@erlang.example'} ! {self(), hello},
-    io:format("Sent hello to foo_handler at foo@erlang.example~n"),
+    io:format("[bar] Sent `hello` from ~w to `foo_handler` at 'foo@erlang.example'~n", [node()]),
     receive
         {goodbye} ->
-            io:format("bar received `goodbye` and will terminate~n"),
+            io:format("[bar] Received `goodbye`, terminating...~n"),
             self() ! stop
     end.
