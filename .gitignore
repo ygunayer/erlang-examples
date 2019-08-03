@@ -1,3 +1,5 @@
 *.beam
 *.dump
 ebin/
+rebar.lock
+

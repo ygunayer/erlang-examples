@@ -13,6 +13,7 @@ Contains the examples in my blog post [Introduction to Erlang](https://yalinguna
 - `distributed`: Demonstration of communicating Erlang nodes using two apps that run simultaneously and send messages to each other
 - `guess-otp`: An Erlang/OTP compliant version of `guess`
 - `configured-apps`: A very basic Erlang/OTP app that demonstrates runtime configurations
+- `rebarred`: A simple app with dependencies, generated and managed by `rebar3`
 
 ## Running
 To run an example, execute `run.sh` and pass it the name of the example (e.g. `./run.sh pokemon`).
