@@ -2,6 +2,7 @@
 set -e
 
 PROJECT=$1
+shift
 
 if [ -z "$PROJECT" ]; then
     echo "Please specify a project name."
@@ -16,7 +17,7 @@ fi
 cd "$PROJECT"
 
 if [ -f "run.sh" ]; then
-    ./run.sh
+    ./run.sh "$@"
 elif [ -f "$PROJECT.erl" ]; then
     rm -f *.beam
     for f in *.erl
